@@ -1,4 +1,4 @@
-package com.in28minutes.springboot.web.service;
+package pl.wojtek.smol.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,13 +7,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.in28minutes.springboot.web.model.Todo;
+import pl.wojtek.smol.model.Todo;
 
 @Service
 public class TodoService {
+    // list of todos
     private static List<Todo> todos = new ArrayList<Todo>();
+    // Number of todos
     private static int todoCount = 3;
 
+    // Initializing some default taks
     static {
         todos.add(new Todo(1, "in28Minutes", "Learn Spring MVC", new Date(),
                 false));
@@ -22,16 +25,7 @@ public class TodoService {
                 false));
     }
 
-    public List<Todo> retrieveTodos(String user) {
-        List<Todo> filteredTodos = new ArrayList<Todo>();
-        for (Todo todo : todos) {
-            if (todo.getUser().equalsIgnoreCase(user)) {
-                filteredTodos.add(todo);
-            }
-        }
-        return filteredTodos;
-    }
-
+    // Retrieves a todo by id
     public Todo retrieveTodo(int id) {
         for (Todo todo : todos) {
             if (todo.getId() == id) {
@@ -41,16 +35,30 @@ public class TodoService {
         return null;
     }
 
+    // Upadate a todo
     public void updateTodo(Todo todo) {
         todos.remove(todo);
         todos.add(todo);
     }
 
+    // Retrieves a list of Todos for a user specified
+    public List<Todo> retrieveTodos(String user) {
+        List<Todo> filteredTodos = new ArrayList<Todo>();
+        for (Todo todo : todos) {
+            if (todo.getUser().equals(user)) {
+                filteredTodos.add(todo);
+            }
+        }
+        return filteredTodos;
+    }
+
+    // Adding todo
     public void addTodo(String name, String desc, Date targetDate,
             boolean isDone) {
         todos.add(new Todo(++todoCount, name, desc, targetDate, isDone));
     }
 
+    //Deleting todos by id
     public void deleteTodo(int id) {
         Iterator<Todo> iterator = todos.iterator();
         while (iterator.hasNext()) {

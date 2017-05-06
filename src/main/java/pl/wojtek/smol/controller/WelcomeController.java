@@ -1,4 +1,5 @@
-package com.in28minutes.springboot.web.controller;
+package pl.wojtek.smol.controller;
+
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WelcomeController {
 
+
+    // Show Main Login Page
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showWelcomePage(ModelMap model) {
-        model.put("name", getLoggedInUserName());
+        model.put("name", getLoggedinUserName());
         return "welcome";
     }
 
-    private String getLoggedInUserName() {
+
+    private String getLoggedinUserName() {
         Object principal = SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
 
@@ -26,5 +30,8 @@ public class WelcomeController {
 
         return principal.toString();
     }
+
+
+
 
 }

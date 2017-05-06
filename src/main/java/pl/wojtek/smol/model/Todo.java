@@ -1,26 +1,28 @@
-package com.in28minutes.springboot.web.model;
-
-import java.util.Date;
+package pl.wojtek.smol.model;
 
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 public class Todo {
-
+    // Task Id
     private int id;
-
+    // User name
     private String user;
-
-    @Size(min = 10, message = "Enter atleast 10 Characters.")
+    // Description
+    // Check fi there are minimum 10 characters
+    @Size(min=10, message="Enter at least 10 characters!")
     private String desc;
-
+    // Date of the task
     private Date targetDate;
-
+    // Is the task done?
     private boolean isDone;
 
+    //Default constructor
     public Todo() {
         super();
     }
 
+    // Public Constructor
     public Todo(int id, String user, String desc, Date targetDate,
             boolean isDone) {
         super();
@@ -30,6 +32,8 @@ public class Todo {
         this.targetDate = targetDate;
         this.isDone = isDone;
     }
+
+    // Getters and Setters:
 
     public int getId() {
         return id;
@@ -71,6 +75,7 @@ public class Todo {
         this.isDone = isDone;
     }
 
+    //hasCode generator
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -79,6 +84,7 @@ public class Todo {
         return result;
     }
 
+    //Overridden equals method
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -97,6 +103,7 @@ public class Todo {
         return true;
     }
 
+    // Overridden toString
     @Override
     public String toString() {
         return String.format(
